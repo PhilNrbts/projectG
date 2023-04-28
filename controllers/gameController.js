@@ -1,30 +1,86 @@
-// controllers/gameController.js
+const Game = require('../models/Game');
+const User = require('../models/User');
 
-// badge1
+class GameController {
+  constructor(playerIds = [], numRounds = 5) {
+    this.game = new Game(numRounds, playerIds);
+  }
 
-const fs = require('fs');
-const { generateQuestionImage } = require('../services/imageService');
+  async createInDatabase() {
+    await this.game.createInDatabase();
+  }
 
-async function handleNewQuestion(socket) {
-  const { image, answerColor } = await generateQuestionImage();
-  const imageFileName = `q${Date.now()}.jpg`;
+  async startGame() {
+    await this.game.start();
+  }
 
-  // Save generated image to the question-images folder
-  fs.writeFile(`public/question-images/${imageFileName}`, image, (err) => {
-    if (err) throw err;
-    console.log('Image saved:', imageFileName);
+  async stopGame() {
+    this.game.stop();
+    await this.game.saveGameHistory();
+  }
 
-    // Send question and answer to the client
-    socket.emit('question', {
-      image: `/question-images/${imageFileName}`,
-      answerColor
-    });
-  });
+  getCurrentQuestion() {
+    return this.game.getCurrentQuestion();
+  }
+
+  async submitAnswer(playerId, answerColor) {
+    const isCorrect = this.game.submitAnswer(playerId, answerColor);
+    await this.game.updateInDatabase();
+    return isCorrect;
+  }
+
+  setPlayerReady(playerId) {
+    this.game.setPlayerReady(playerId);
+  }
+
+  setPlayerNotReady(playerId) {
+    this.game.setPlayerNotReady(playerId);
+  }
+
+  allPlayersReady() {
+    return this.game.allPlayersReady();
+  }
+
+  getPlayerReactionTimes(playerId) {
+    return this.game.getPlayerReactionTimes(playerId);
+  }
+
+  isGameFinished() {
+    return this.game.isFinished;
+  }
 }
 
-// Other game-related functions can be added here as needed
+// controllers/gameController.js
+const createGame = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
 
-module.exports = {
-  handleNewQuestion,
-  // Export other functions as needed
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const numRounds = 5; // You can change this value or get it from req.body
+
+    // Get playerIds from request body or default to the current user
+    const playerIds = req.body.playerIds ? req.body.playerIds : [userId];
+
+    const gameControllerInstance = new GameController(playerIds, numRounds);
+    await gameControllerInstance.createInDatabase();
+    await gameControllerInstance.startGame();
+
+    const gameData = {
+      _id: gameControllerInstance.game._id,
+      numRounds,
+      players: playerIds.map((playerId) => ({ playerId })),
+      ...req.body,
+      user: userId,
+    };
+
+    res.status(201).json({ game: gameData });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong' });
+  }
 };
+
+module.exports = { createGame };
