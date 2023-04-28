@@ -7,19 +7,36 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "assert": "^2.0.0",
+    "bcrypt": "^5.1.0",
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
+    "describe": "^1.2.0",
+    "dotenv": "^16.0.3",
+    "expect": "^29.5.0",
+    "express": "^4.18.2",
     "fs": "^0.0.1-security",
-    "mocha": "^10.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "junit": "^0.5.1",
+    "mongodb": "^5.3.0",
+    "mongoose": "^7.0.5",
     "path": "^0.12.7",
     "sharp": "^0.32.0",
     "sinon": "^15.0.4",
     "socket.io": "^4.6.1",
+    "test": "^3.3.0",
     "util": "^0.12.5"
+  },
+  "devDependencies": {
+    "dox": "^1.0.0",
+    "jest": "^29.5.0",
+    "mocha": "^10.2.0"
   }
 }

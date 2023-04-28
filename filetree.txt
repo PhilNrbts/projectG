@@ -1,0 +1,94 @@
+.
+├── app.js
+├── config
+│   ├── database.js
+│   └── socketio.js
+├── controllers
+│   ├── chatController.js
+│   ├── gameController.js
+│   ├── gameSocketController.js
+│   ├── lobbyController.js
+│   └── userController.js
+├── filetree.md
+├── filetree.txt
+├── middleware
+│   ├── authMiddleware.js
+│   ├── errorHandling.js
+│   └── validation.js
+├── models
+│   ├── Chat.js
+│   ├── GameHistory.js
+│   ├── Game.js
+│   ├── GameSchema.js
+│   ├── Lobby.js
+│   ├── Player.js
+│   └── User.js
+├── package.json
+├── package-lock.json
+├── public
+│   ├── answer-images
+│   │   ├── blue.png
+│   │   ├── green.png
+│   │   ├── purple.png
+│   │   ├── red.png
+│   │   └── yellow.png
+│   ├── css
+│   ├── js
+│   └── question-images
+│       ├── 1682497424385-5
+│       │   ├── q1.jpg
+│       │   ├── q2.jpg
+│       │   ├── q3.jpg
+│       │   ├── q4.jpg
+│       │   └── q5.jpg
+│       ├── 1682497430214-5
+│       │   ├── q1.jpg
+│       │   ├── q2.jpg
+│       │   ├── q3.jpg
+│       │   ├── q4.jpg
+│       │   └── q5.jpg
+│       ├── 1682646117816-5
+│       │   ├── q1.jpg
+│       │   ├── q2.jpg
+│       │   ├── q3.jpg
+│       │   ├── q4.jpg
+│       │   └── q5.jpg
+│       ├── 1682646125880-5
+│       │   ├── q1.jpg
+│       │   ├── q2.jpg
+│       │   ├── q3.jpg
+│       │   ├── q4.jpg
+│       │   └── q5.jpg
+│       ├── test-q1682458761840.jpg
+│       ├── test-q1682458781345.jpg
+│       ├── test-q1682476662669.jpg
+│       └── test-q1682497246692.jpg
+├── README.md
+├── routes
+│   ├── chatRoutes.js
+│   ├── gameRoutes.js
+│   ├── lobbyRoutes.js
+│   └── userRoutes.js
+├── scripts
+│   ├── createColorPNG.py
+│   ├── createStructure.py
+│   └── setup.ipynb
+├── server.js
+├── services
+│   └── imageService.js
+├── test
+│   ├── test.game.js
+│   ├── test.js
+│   └── test.scenario.js
+├── tests
+│   ├── codeGPTtests
+│   │   ├── codeGPTtest.js
+│   │   └── game.test.js
+│   ├── testImageService.js
+│   ├── testSingleGame.js
+│   └── testSinglePlayerGameController.js
+├── tree.json
+└── utils
+    └── eventHandlers.js
+
+20 directories, 71 files
