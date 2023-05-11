@@ -2,6 +2,9 @@
 
 const mongoose = require('mongoose');
 
+/**
+ * The schema for the GameHistory model.
+ */
 const gameHistorySchema = new mongoose.Schema({
   gameID: {
     type: String,
