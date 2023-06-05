@@ -1,0 +1,7 @@
+tasks:
+  - init: |
+      echo "MONGO_URI=$MONGO_URI" > .env
+      echo "JWT_SECRET=$JWT_SECRET" >> .env
+      echo "PORT=$PORT" >> .env
+      npm install
+    command: npm run start

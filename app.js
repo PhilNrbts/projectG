@@ -9,11 +9,11 @@
  */
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
+const Datastore = require('nedb');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const gameRoutes = require('./routes/gameRoutes');
-const { MONGO_URI } = require('./config/database');
+const db = new Datastore({ filename: 'path/to/datafile', autoload: true });
 
 /**
  * Load environment variables from .env file.
