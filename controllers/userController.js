@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const registerUser = async (req, res) => {
-  console.log(`[${new Date().toISOString()}] Register user called`);
   try {
     const { username, email, password } = req.body;
     const existingUser = await User.findOne({ $or: [{ email }, { username }] });
@@ -29,29 +28,33 @@ const registerUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong' });
   }
-  console.log(`[${new Date().toISOString()}] Register user finished`);
 };
-
 
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const { usernameOrEmail, password } = req.body;
+    console.log('Login:', { usernameOrEmail, password }); // Add this line for debugging
+    const user = await User.findOne({
+      $or: [{ email: usernameOrEmail }, { username: usernameOrEmail }],
+    });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      console.log('Invalid username or email.'); // Add this line for debugging
+      return res.status(400).json({ message: 'Invalid username or email.' });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+    if (!isMatch) {
+      console.log('Invalid password.'); // Add this line for debugging
+      return res.status(400).json({ message: 'Invalid password.' });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({ token });
   } catch (error) {
+    console.log('Error:', error); // Add this line for debugging
     res.status(500).json({ message: 'Something went wrong' });
   }
 };
@@ -120,4 +123,3 @@ module.exports = {
   logoutUser,
   getUserGameHistory,
 };
-

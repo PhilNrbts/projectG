@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project G</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="information-wrapper">
+      <div class="info-display-wrapper" id="info-display-wrapper">
+        <div class="player-info">Player ID: 123</div>
+        <div class="room-info">Room ID: ABC</div>
+        <div class="gamestate-info">
+          <div>Current Round: 1</div>
+          <div>Scoreboard:
+            <ul>
+              <li>Player 1: 10 points</li>
+              <li>Player 2: 8 points</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <button class="option-button" onclick="showLoginForm()">Login</button>
+        <button class="option-button" onclick="showRegisterForm()">Register</button>
+      </div>
+    </div>
+    <div class="playfield-wrapper">
+      <div class="image-area">
+        <img src="question-images/example-question-image/test.jpg" alt="Game Image">
+      </div>
+      <div class="option-menu-wrapper">
+        <button class="color-button" data-color="Blue">
+          <img src="answer-images/blue.png" alt="Blue">
+          <span>Blue</span>
+        </button>
+        <button class="color-button" data-color="Green">
+          <img src="answer-images/green.png" alt="Green">
+          <span>Green</span>
+        </button>
+        <button class="color-button" data-color="Purple">
+          <img src="answer-images/purple.png" alt="Purple">
+          <span>Purple</span>
+        </button>
+        <button class="color-button" data-color="Red">
+          <img src="answer-images/red.png" alt="Red">
+          <span>Red</span>
+        </button>
+        <button class="color-button" data-color="Yellow">
+          <img src="answer-images/yellow.png" alt="Yellow">
+          <span>Yellow</span>
+        </button>
+      </div>
+    </div>
+    <div class="chat-wrapper">
+      <!-- Chatbox -->
+      <div id="chatbox">
+        <h2>Chat</h2>
+        <div id="messages"></div>
+        <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type your message">
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>
